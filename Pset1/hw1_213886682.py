@@ -10,31 +10,20 @@
 
 
 # Question 4a
-def union_strings(str1,str2):
-	
-	# initialize list to hold the letters which appear in the input strings
-	present_letters = []
-	
-	try: 
-		assert len(str1)>=0 and len(str2)>= 0
-	
-		# Check if character in input strings 
-		for char1, char2 in zip(str1, str2):
-			if char1 not in present_letters: 
-				present_letters.append(char1)
-			else:
-				pass
-	
-			if char2 not in present_letters: 
-				present_letters.append(char2)
-			else:
-				pass			
-					
-		# after we checked for the characters in the strings, return
-		return present_letters
-		
-	except AssertionError as e:
-		print(f"Please enter a non-empty string \n {e}")
+def union_strings(str1, str2):
+    
+    try: 
+
+        # add the two strings
+        combined_str = str1 + str2
+        # remove duplicates by converting to set
+        unique_chars = set(combined_str)
+        # join the unique characters back into a string
+        new_str = "".join(unique_chars)
+        return new_str
+        
+    except AssertionError as e:
+        print(f"Please enter a non-empty string \n {e}")
 
 # Question 4b
 def format_str(text_to_format, st_to_insert):
@@ -270,13 +259,40 @@ def is_anagram_v3(st1, st2):
 
 # Question 6a
 def eval_mon(monomial, val):
-    pass
-
+    # split by the x
+    split_list = monomial.split("x")
+    
+    # as the coefficent is left to the number it will be the first in the split
+    coeff = int(split_list[0])
+    
+    # the power is everything but the first character ("^")
+    power = int(split_list[1][1:])
+    
+    # combine them and substitute the value
+    return coeff*(val**power)
 
 # Question 6b
 def eval_pol(polynomial, val):
-    pass
-
+    
+    # initialize from first index and with polynomial sum of zero
+    last_mono = 0
+    poly_sum = 0
+    
+    # loop over length of the polynomial
+    for i in range(1, len(polynomial)):
+        
+        # the signs indicate a new monomial
+        if polynomial[i] in ["+", "-"]:
+            # evaluate the individual monomial
+            poly_sum += eval_mon(polynomial[last_mono:i], val)
+            
+            # update the index from which we will continue next
+            last_mono = i
+            
+    # add the last monomial to the sum
+    poly_sum += eval_mon(polynomial[last_mono:], val)
+    
+    return poly_sum
 
 ########
 # Tester
@@ -371,3 +387,5 @@ def test():
         print("error in eval_pol - 3")
 
     print("`test()` completed.")
+
+test()
