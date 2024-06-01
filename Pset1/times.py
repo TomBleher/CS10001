@@ -23,14 +23,15 @@ def zeros3(num):
     cnt = str(num).count("0")
     return cnt
 
-nums_log = [] 
+nums = [] 
 comp_times1 = []
 comp_times2 = []
 comp_times3 = []
 
 # Loop over numbers mentioned in pset
-for num in [1e10, 2e10, 3e10, 4e10, 5e10, 6e10, 7e10, 8e10, 9e10, 10e10]:
-    nums_log.append(num)  # Store log10 of the number for plotting purposes
+for exponent in [100, 250, 600, 1400]:
+    num = 2 ** exponent
+    nums.append(math.log10(num))  # Store log10 of the number for plotting purposes
     
     t0 = time.perf_counter()
     zeros(num)
@@ -49,15 +50,18 @@ for num in [1e10, 2e10, 3e10, 4e10, 5e10, 6e10, 7e10, 8e10, 9e10, 10e10]:
 
 # Give the plot axes labels
 plt.ylabel(r"$t_{s}$")
-plt.xlabel(r"$n$")
+plt.xlabel(r"$\log_{10}{n}$")
 
 # Plot the data 
-plt.plot(nums_log, comp_times1, label='zeros')
-plt.plot(nums_log, comp_times2, label='zeros2')
-plt.plot(nums_log, comp_times3, label='zeros3')
+plt.plot(nums, comp_times1, label='zeros')
+plt.plot(nums, comp_times2, label='zeros2')
+plt.plot(nums, comp_times3, label='zeros3')
 
 # Display labels and plot
 plt.legend()
 
-plt.savefig('log.png', dpi=400, format='jpg', bbox_inches='tight')  
+# Save the plot with specified DPI, format, and without cropping
+plt.savefig('comparison_plot.png', dpi=400, format='jpg', bbox_inches='tight')  
+
+# Show the plot
 plt.show()
