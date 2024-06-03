@@ -50,7 +50,7 @@ for exponent in [100, 250, 600, 1400]:
 
 # Give the plot axes labels
 plt.ylabel(r"$t_{s}$")
-plt.xlabel(r"$\log_{10}{n}$")
+plt.xlabel(r"$\log_{10}{2^{n}}$")
 
 # Plot the data 
 plt.plot(nums, comp_times1, label='zeros')

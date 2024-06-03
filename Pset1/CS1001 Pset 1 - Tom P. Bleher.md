@@ -29,13 +29,13 @@ Since the third case of an `str` type input of length eight with no digits did n
 ##### Solution 3.a.b
 Using the following [code](https://github.com/TomBleher/CS10001/blob/main/Pset1/times.py) which utilizes the `matplotlib` library, I get the following plot:
 
-Since using the numbers directly resulted in an `OverflowError`, I resorted to using the base 10 log of the number. From the graph, we can clearly see that the `str.count` based function is the most efficient. The plot for the original `zeros` function has a steep relationship with $\log_{10}n$ which means that it raises exponentially for $n$. 
-![[log 1.jpg|center|500]]
+Since using the numbers directly resulted in an `OverflowError`, I resorted to using the base 10 log of the number. From the graph, we can clearly see that the `str.count` based function is the most efficient. The plot for the original `zeros` function has a steep almost linear relationship with $\log_{10}2^n$ which means that the computation time raises logarithmically with respect to $2^{n}$. 
+![[comparison_plot 3.png|center|500]]
 
 If, for a moment, I remove `zeros` function so we can focus on the other plots:
 ![[comparison_plot 2.png|center|500]]
 
-Beyond $\sim\log_{10}2^{75}$, both functions start to raise exponentially, but still the rate of change for the Python-based function is smaller. When comparing the two functions to the `zeros` function there is pretty much no comparison, they are already on different orders of magnitude. 
+Beyond $\sim\log_{10}2^{75}$, both functions start to raise logarithmically, but still the rate of change for the Python-based function is smaller. When comparing the two functions to the `zeros` function there is pretty much no comparison, they are orders of magnitude different. 
 
 ##### Solution 3.c
 Running my small plotting code on the numbers $\{1e10, 2e10, \ldots, 10e10\}$, the plot suggests that the differences for numbers of the same order of magnitude is less drastic, but nevertheless noticeable:
